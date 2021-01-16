@@ -6,11 +6,11 @@
 #    By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/26 13:14:25 by fhelena           #+#    #+#              #
-#    Updated: 2021/01/16 17:05:23 by fhelena          ###   ########.fr        #
+#    Updated: 2021/01/16 18:17:36 by fhelena          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= ft_c
+NAME			= minishell
 LIB				= libft.a
 
 SRC_DIR			= src
