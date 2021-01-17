@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/23 11:50:06 by fhelena           #+#    #+#             */
-/*   Updated: 2021/01/17 19:45:02 by fhelena          ###   ########.fr       */
+/*   Created: 2021/01/17 15:28:30 by fhelena           #+#    #+#             */
+/*   Updated: 2021/01/17 15:36:18 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+/*
+** Description:	Freeing memory from the matrix
+**
+** NOTE:		(free){matrix,*matrix}
+*/
+
+void	free_matrix(char **matrix, int size)
 {
-	char *sub;
+	int	i;
 
-	if (!s || !(sub = (char *)ft_memalloc(len + 1)))
-		return ((void *)0);
-	sub = ft_strncpy(sub, (char *)(s + start), len);
-	return (sub);
+	i = 0;
+	while (i < size)
+	{
+		free(matrix[i]);
+		++i;
+	}
+	free(matrix);
 }

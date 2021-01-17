@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 11:45:26 by fhelena           #+#    #+#             */
-/*   Updated: 2020/05/23 11:45:27 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:29:11 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_itoa(int n)
 		return (ft_strdup("-2147483648"));
 	len = ft_nbrlen(n);
 	if (!(s = (char *)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
+		return ((void *)0);
 	if (n < 0)
 	{
 		s[0] = '-';

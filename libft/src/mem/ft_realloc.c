@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 11:47:06 by fhelena           #+#    #+#             */
-/*   Updated: 2020/05/23 11:47:07 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:35:38 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ void	*ft_realloc(void *ptr, size_t size)
 	if (!ptr)
 	{
 		if (!(newptr = ft_memalloc(size)))
-			return (NULL);
+			return ((void *)0);
 		return (newptr);
 	}
 	if (!size)
 	{
 		free(ptr);
-		return (NULL);
+		return ((void *)0);
 	}
 	if (!(newptr = ft_memalloc(size)))
 	{
 		free(ptr);
-		return (NULL);
+		return ((void *)0);
 	}
 	ft_memcpy(newptr, ptr, size);
 	ft_memdel(ptr);

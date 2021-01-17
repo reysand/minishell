@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 11:46:22 by fhelena           #+#    #+#             */
-/*   Updated: 2020/05/23 11:46:23 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:29:51 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 		if (*source++ == value)
 			return ((void *)target);
 	}
-	return (NULL);
+	return ((void *)0);
 }

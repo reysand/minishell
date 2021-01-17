@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 11:42:51 by fhelena           #+#    #+#             */
-/*   Updated: 2020/05/23 11:43:30 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:20:52 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char		*check_file(char *file, char **line)
 {
 	char	*ptr;
 
-	ptr = NULL;
+	ptr = (void *)0;
 	if (file)
 		if ((ptr = ft_strchr(file, '\n')))
 		{
@@ -67,10 +67,10 @@ static t_list	*new_list(const int fd)
 	t_list	*new;
 
 	if (!(new = (t_list *)malloc(sizeof(t_list))))
-		return (NULL);
+		return ((void *)0);
 	new->content_size = fd;
-	new->content = NULL;
-	new->next = NULL;
+	new->content = (void *)0;
+	new->next = (void *)0;
 	return (new);
 }
 
@@ -79,7 +79,7 @@ static void		del_list(const int fd, t_list **head)
 	t_list	*prev;
 	t_list	*list;
 
-	if (*head == NULL)
+	if (*head == (void *)0)
 		return ;
 	list = *head;
 	prev = list;
@@ -101,11 +101,11 @@ static void		del_list(const int fd, t_list **head)
 
 int				get_next_line(const int fd, char **line)
 {
-	static t_list	*head = NULL;
+	static t_list	*head = (void *)0;
 	t_list			*file;
 	int				ret;
 
-	if (fd < 0 || !line || BUFF_SIZE < 1 || read(fd, NULL, 0))
+	if (fd < 0 || !line || BUFF_SIZE < 1 || read(fd, (void *)0, 0))
 		return (-1);
 	if (!head)
 		if (!(head = new_list(fd)))

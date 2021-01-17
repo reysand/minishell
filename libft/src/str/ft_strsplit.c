@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 11:49:55 by fhelena           #+#    #+#             */
-/*   Updated: 2020/05/23 11:49:56 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:44:18 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char		*ft_arraycpy(char const *s, char c)
 	i = 0;
 	len = ft_wordlen(s, c);
 	if (!(item = (char *)ft_memalloc(len + 1)))
-		return (NULL);
+		return ((void *)0);
 	while (i < len)
 		item[i++] = *s++;
 	return (item);
@@ -60,10 +60,10 @@ char			**ft_strsplit(char const *s, char c)
 	char		**list;
 
 	if (!s)
-		return (NULL);
+		return ((void *)0);
 	words = ft_wordcount((char *)s, c);
 	if (!(list = (char **)ft_memalloc(sizeof(char *) * (words + 1))))
-		return (NULL);
+		return ((void *)0);
 	i = 0;
 	while (i < words)
 	{
@@ -71,11 +71,11 @@ char			**ft_strsplit(char const *s, char c)
 		if (!(list[i] = ft_arraycpy(s, c)))
 		{
 			ft_arrayfree(list, i);
-			return (NULL);
+			return ((void *)0);
 		}
 		++i;
 		s += (ft_wordlen(s, c) + 1);
 	}
-	list[words] = NULL;
+	list[words] = (void *)0;
 	return (list);
 }

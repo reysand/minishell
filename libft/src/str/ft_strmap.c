@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 11:49:02 by fhelena           #+#    #+#             */
-/*   Updated: 2020/05/23 11:49:05 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:42:19 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ char	*ft_strmap(char const *s, char (*f)(char))
 	char	*res;
 
 	if (!s || !f)
-		return (NULL);
+		return ((void *)0);
 	len = ft_strlen(s);
 	if (!(res = ft_strnew(len)))
-		return (NULL);
+		return ((void *)0);
 	res += len;
 	s += len;
 	while (len-- > 0)

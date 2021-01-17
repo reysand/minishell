@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 11:49:43 by fhelena           #+#    #+#             */
-/*   Updated: 2020/05/23 11:49:44 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:43:21 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 			return (str);
 		++str;
 	}
-	return (NULL);
+	return ((void *)0);
 }

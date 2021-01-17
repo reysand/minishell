@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 11:43:56 by fhelena           #+#    #+#             */
-/*   Updated: 2020/05/23 11:43:57 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:27:21 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 		free(*alst);
 		*alst = (*alst)->next;
 	}
-	*alst = NULL;
+	*alst = (void *)0;
 }

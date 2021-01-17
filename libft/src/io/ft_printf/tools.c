@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 17:59:06 by fhelena           #+#    #+#             */
-/*   Updated: 2020/09/10 01:39:03 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:23:38 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char		*ptf_itoa_base(long long value, int base, const char *b, char flag)
 		n = value;
 	i = itoa_len(n, base) + sign;
 	if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
-		return (NULL);
+		return ((void *)0);
 	str[i--] = '\0';
 	if (!value)
 		str[0] = '0';

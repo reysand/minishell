@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 11:48:20 by fhelena           #+#    #+#             */
-/*   Updated: 2020/05/23 11:48:21 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:39:57 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strdup(const char *s1)
 
 	len = ft_strlen(s1);
 	if (!(s2 = (char *)ft_memalloc(len + 1)))
-		return (NULL);
+		return ((void *)0);
 	ft_strcpy(s2, s1);
 	return (s2);
 }

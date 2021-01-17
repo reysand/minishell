@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 11:48:13 by fhelena           #+#    #+#             */
-/*   Updated: 2020/05/23 11:48:15 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:38:42 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,5 @@ void	ft_strdel(char **as)
 	if (!as)
 		return ;
 	free(*as);
-	*as = NULL;
+	*as = (void *)0;
 }

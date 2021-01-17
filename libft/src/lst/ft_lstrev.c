@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 11:47:37 by fhelena           #+#    #+#             */
-/*   Updated: 2020/05/23 11:47:39 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:36:10 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_list		*ft_lstrev(t_list *lst)
 	t_list *temp;
 	t_list *next;
 
-	prev = NULL;
+	prev = (void *)0;
 	temp = lst;
-	next = NULL;
+	next = (void *)0;
 	while (temp)
 	{
 		next = temp->next;

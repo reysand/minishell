@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 19:14:11 by fhelena           #+#    #+#             */
-/*   Updated: 2020/11/11 20:48:59 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:23:13 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_type	g_type[] =
 	{'X', &hex_parse},
 	{'f', &float_parse},
 	{'%', &percent_parse},
-	{0, NULL}
+	{0, (void *)0}
 };
 
 static int	get_type_pos(const char *str)

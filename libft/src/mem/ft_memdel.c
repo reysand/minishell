@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 11:46:47 by fhelena           #+#    #+#             */
-/*   Updated: 2020/05/23 11:46:48 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/01/17 19:30:28 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,5 @@ void	ft_memdel(void **ap)
 	if (!ap)
 		return ;
 	free(*ap);
-	*ap = NULL;
+	*ap = (void *)0;
 }
