@@ -6,12 +6,13 @@
 #    By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/21 23:28:59 by fhelena           #+#    #+#              #
-#    Updated: 2020/09/24 14:53:09 by fhelena          ###   ########.fr        #
+#    Updated: 2021/01/25 11:49:50 by fhelena          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= libft.a
 
+# Directories
 SRC_DIR			= src
 INC_DIR			= include
 BLD_DIR			= build
@@ -27,19 +28,21 @@ SRCS			= $(CHAR) $(IO) $(LST) $(MATH) $(MEM) $(STR)
 OBJS			= $(SRCS:%.c=$(BLD_DIR)/%.o)
 DEPS			= $(SRCS:%.c=$(BLD_DIR)/%.d)
 
-SHELL			= /bin/sh
-CC				?= gcc
+# Programs
+CC				= gcc
 AR				= ar
 RM				= rm -rf
 MKDIR			= mkdir -p
 NORME			= $(shell norminette $(SRCS) $(INC_DIR)\
 				  | grep "Error" | wc -l | tr -d ' ')
 
-AFLAGS			= -rsuv
+# Flags
+ARFLAGS			= -rsuv
 CFLAGS			= -Wall -Wextra -Werror
-DFLAGS			= -MMD
-IFLAGS			= -I $(INC_DIR)
+DEPFLAGS		= -MMD
+INCFLAGS		= -I $(INC_DIR)
 
+# ANSI Escape Sequences
 R_CLEAN			= \033[K
 C_RESET			= \033[00m
 COLOR_R			= \033[31m
@@ -67,7 +70,7 @@ $(NAME):		$(OBJS)
 $(BLD_DIR)/%.o:	%.c
 	@$(MKDIR) $(dir $@)
 	@printf "\r$(R_CLEAN)Assembling: $< -> $@"
-	@$(CC) $(CFLAGS) $(DFLAGS) $(IFLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(DEPFLAGS) $(INCFLAGS) -o $@ -c $<
 
 PHONY			+= clean
 clean:

@@ -6,13 +6,14 @@
 #    By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/26 13:14:25 by fhelena           #+#    #+#              #
-#    Updated: 2021/01/17 15:20:16 by fhelena          ###   ########.fr        #
+#    Updated: 2021/01/25 11:50:39 by fhelena          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 LIB				= libft.a
 
+# Directories
 SRC_DIR			= src
 INC_DIR			= include
 BLD_DIR			= build
@@ -24,24 +25,26 @@ SRCS			= $(SRC)
 OBJS			= $(SRCS:%.c=$(BLD_DIR)/%.o)
 DEPS			= $(SRCS:%.c=$(BLD_DIR)/%.d)
 
-SHELL			= /bin/sh
-CC				?= gcc
+# Programs
+CC				= gcc
 MKDIR			= mkdir -p
 MAKE			= make -sC
 RM				= rm -rf
 NORME			= $(shell norminette $(SRCS) $(INC_DIR)\
 				  | grep "Error" | wc -l | tr -d ' ')
 
+# Flags
 CFLAGS			= -Wall -Wextra -Werror
-DFLAGS			= -MT $@ -MMD -MP
-IFLAGS			= -I $(INC_DIR) -I $(LIB_DIR)/$(INC_DIR)
-LFLAGS			= -L $(LIB_DIR) -lft
+DEPFLAGS		= -MT $@ -MMD -MP
+INCFLAGS		= -I $(INC_DIR) -I $(LIB_DIR)/$(INC_DIR)
+LDFLAGS			= -L $(LIB_DIR)
+LDLIBS			= -lft
 
+# ANSI Escape Sequences
 R_CLEAN			= \033[K
 C_RESET			= \033[00m
 COLOR_R			= \033[31m
 COLOR_G			= \033[32m
-COLOR_Y			= \033[33m
 
 PHONY			+= all
 all:			libft $(NAME)
@@ -65,14 +68,14 @@ check:			norme all
 
 $(NAME):		$(OBJS)
 	@printf "\r$(R_CLEAN)Linking: -> $(NAME)\n\t$(subst $(subst ,, ),\n\t,$^)\n"
-	@$(CC) $(CFLAGS) $(IFLAGS) -o $@ $^ $(LFLAGS)
+	@$(CC) $(CFLAGS) $(INCFLAGS) -o $@ $^ $(LDFLAGS) $(LDLIBS)
 
 $(BLD_DIR):
 	@$(MKDIR) $(dir $(OBJS))
 
 $(BLD_DIR)/%.o:	%.c $(LIB_DIR)/$(LIB) | $(BLD_DIR)
 	@printf "\r$(R_CLEAN)Assembling: $< -> $@"
-	@$(CC) $(CFLAGS) $(IFLAGS) -o $@ -c $< $(DFLAGS)
+	@$(CC) $(CFLAGS) $(INCFLAGS) -o $@ -c $< $(DEPFLAGS)
 
 PHONY			+= clean
 clean:
