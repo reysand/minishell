@@ -6,14 +6,13 @@
 #    By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/26 13:14:25 by fhelena           #+#    #+#              #
-#    Updated: 2021/01/26 17:51:34 by fhelena          ###   ########.fr        #
+#    Updated: 2021/02/04 18:16:13 by fhelena          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 LIB				= libft.a
 
-# Directories
 SRC_DIR			= src
 INC_DIR			= include
 BLD_DIR			= build
@@ -25,7 +24,6 @@ SRCS			= $(SRC)
 OBJS			= $(SRCS:%.c=$(BLD_DIR)/%.o)
 DEPS			= $(SRCS:%.c=$(BLD_DIR)/%.d)
 
-# Programs
 CC				= gcc
 MKDIR			= -mkdir -p
 MAKE			= make -sC
@@ -33,14 +31,12 @@ RM				= -rm -rf
 NORME			= $(shell norminette $(SRCS) $(INC_DIR)\
 				  | grep "Error" | wc -l | tr -d ' ')
 
-# Flags
 CFLAGS			= -Wall -Wextra -Werror
 DEPFLAGS		= -MT $@ -MMD -MP
 INCFLAGS		= -I $(INC_DIR) -I $(LIB_DIR)/$(INC_DIR)
 LDFLAGS			= -L $(LIB_DIR)
 LDLIBS			= -lft
 
-# ANSI Escape Sequences
 R_CLEAN			= \033[K
 C_RESET			= \033[00m
 COLOR_R			= \033[31m

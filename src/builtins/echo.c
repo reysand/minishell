@@ -6,14 +6,22 @@
 /*   By: fhelena <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:06:34 by fhelena           #+#    #+#             */
-/*   Updated: 2021/01/26 13:39:26 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/04 17:31:58 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	echo_builtin(void)
+/*
+** Description: Write arguments to the standard output
+*/
+
+int	echo_builtin(char **string)
 {
-	ft_printf("placeholder for builtin echo\n");
-	return ;
+	while (*string)
+	{
+		ft_printf("%s ", *string++);
+	}
+	ft_printf("\n");
+	return (EXIT_SUCCESS);
 }
