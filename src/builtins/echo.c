@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:06:34 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/06 12:35:57 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/06 18:38:36 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@
 ** Description: Write arguments to the standard output
 */
 
-int	echo_builtin(char **string)
+void	echo_builtin(char **string)
 {
-	while (*string)
+	int	i;
+
+	i = 1;
+	while (string[i])
 	{
-		ft_printf("%s ", *string++);
+		ft_printf("%s ", string[i]);
+		++i;
 	}
 	ft_printf("\n");
-	return (EXIT_SUCCESS);
+	return ;
 }

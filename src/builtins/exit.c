@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhelena <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:06:34 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/04 19:36:49 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/06 16:42:45 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdlib.h>
-
-/*
-**
-*/
 
 void	exit_builtin(int status)
 {

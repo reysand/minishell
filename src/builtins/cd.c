@@ -3,17 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhelena <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:06:34 by fhelena           #+#    #+#             */
-/*   Updated: 2021/01/26 16:33:59 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/06 17:38:10 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	cd_builtin(void)
+int	cd_builtin(char *path)
 {
-	ft_printf("placeholder for builtin cd\n");
-	return ;
+	int	ret;
+
+	ret = chdir(path);
+	if (ret != 0)
+	{
+		ret = 1;
+		ft_printf("cd: %s: %s\n", path, strerror(errno));
+	}
+	return (ret);
 }
