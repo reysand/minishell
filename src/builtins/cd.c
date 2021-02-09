@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:06:34 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/06 17:38:10 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/08 12:53:49 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int	cd_builtin(char *path)
 {
 	int	ret;
 
-	ret = chdir(path);
-	if (ret != 0)
+	ret = 0;
+	if (path && chdir(path) == -1)
 	{
 		ret = 1;
-		ft_printf("cd: %s: %s\n", path, strerror(errno));
+		ft_printf_fd(STDERR_FILENO, "cd: %s: Fail\n", path);
 	}
 	return (ret);
 }

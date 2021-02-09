@@ -6,13 +6,12 @@
 #    By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/26 13:14:25 by fhelena           #+#    #+#              #
-#    Updated: 2021/02/06 16:46:59 by fhelena          ###   ########.fr        #
+#    Updated: 2021/02/08 13:41:53 by fhelena          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 LIB				= libft.a
-CHANGELOG		= ChangeLog
 
 SRC_DIR			= src
 INC_DIR			= include
@@ -26,7 +25,6 @@ OBJS			= $(SRCS:%.c=$(BLD_DIR)/%.o)
 DEPS			= $(SRCS:%.c=$(BLD_DIR)/%.d)
 
 SHELL			= /bin/bash
-DATE			= date
 CC				= gcc
 MKDIR			= -mkdir -p
 MAKE			= make -sC
@@ -46,7 +44,7 @@ COLOR_R			= \033[31m
 COLOR_G			= \033[32m
 
 PHONY			+= all
-all:			libft changelog $(NAME)
+all:			libft $(NAME)
 	@printf "$(COLOR_G)PASS:$(C_RESET)\t$(NAME)\n"
 
 PHONY			+= libft
@@ -65,18 +63,12 @@ PHONY			+= check
 check:			norme all
 	@printf "$(COLOR_G)PASS:$(C_RESET)\tcheck\n"
 
-PHONY			+= changelog
-changelog:
-	@$(DATE) >> $(CHANGELOG) && echo "" >> $(CHANGELOG)
-
 $(NAME):		$(OBJS)
-	@echo "" >> $(CHANGELOG)
 	@printf "\r$(R_CLEAN)Linking: -> $@\n\t$(subst $(subst ,, ),\n\t,$^)\n"
 	@$(CC) $(CFLAGS) $(INCFLAGS) -o $@ $^ $(LDFLAGS) $(LDLIBS)
 
 $(BLD_DIR)/%.o:	%.c $(LIB_DIR)/$(LIB)
 	@$(MKDIR) $(@D)
-	@$(shell git diff --stat | grep $< >> ChangeLog)
 	@printf "\r$(R_CLEAN)Assembling: $< -> $@"
 	@$(CC) $(CFLAGS) $(INCFLAGS) -o $@ -c $< $(DEPFLAGS)
 

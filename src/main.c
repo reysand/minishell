@@ -6,58 +6,28 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:23 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/06 18:39:53 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/09 14:55:25 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		get_matrix_size(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	while (matrix[i])
-	{
-		++i;
-	}
-	return (i);
-}
-
-char	**parser(char *line)
-{
-	char	**cmd;
-
-	cmd = ft_strsplit(line, ' ');
-	cmd[get_matrix_size(cmd)] = (void *)0;
-	free(line);
-	return (cmd);
-}
-
 int		executor(char **cmd, char **envp)
 {
-	int	ret;
-	int	i;
+	int		ret;
 
 	ret = 0;
 	if (ft_strcmp(*cmd, "exit") == 0)
-	{
-		exit_builtin(EXIT_SUCCESS);
-	}
+		ret = exit_builtin(ret, cmd);
 	else if (ft_strcmp(*cmd, "echo") == 0)
-	{
 		echo_builtin(cmd);
-	}
 	else if (ft_strcmp(*cmd, "cd") == 0)
-	{
 		ret = cd_builtin(cmd[1]);
-	}
+	else if (ft_strcmp(*cmd, "env") == 0)
+		env_builtin(envp);
 	else
-	{
 		ret = execve(*cmd, cmd, envp);
-	}
-	i = get_matrix_size(cmd);
-	free_matrix(cmd, i);
+	ft_strdel(cmd);
 	return (ret);
 }
 
@@ -76,14 +46,13 @@ int		main(int argc, char **argv, char **envp)
 		ft_printf_fd(STDERR_FILENO, "%s", PROMPT);
 		if (get_next_line(STDIN_FILENO, &line) != 1)
 		{
-			ft_printf("exit\n");
+			ft_printf_fd(STDERR_FILENO, "exit\n");
 			return (ret);
 		}
-		cmd = parser(line);
+		cmd = ft_strsplit(line, ' ');
+		free(line);
 		if (*cmd && (ret = executor(cmd, envp)) != 0)
-		{
 			ft_printf("[MINISHELL: %d] %s\n", ret, strerror(errno));
-		}
 	}
 	return (ret);
 }
