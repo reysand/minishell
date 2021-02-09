@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:11 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/09 18:09:03 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/09 19:14:12 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include <string.h>
 # include <stdlib.h>
+# include <sys/wait.h>
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
