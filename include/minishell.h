@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:11 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/09 19:14:12 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/11 20:00:06 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,24 @@
 # define STDIN_FILENO 0
 # define STDOUT_FILENO 1
 # define STDERR_FILENO 2
-# define PROMPT "minishell-0.1.2$ "
-# define SHELL "minishell"
+# define PS0 "minishell"
+# define PS1 "minishell-0.1.2$ "
 
-int		cd_builtin(char *path);
-void	echo_builtin(char **string);
-void	env_builtin(char **envp);
-int		exit_builtin(int ret, char **string);
+typedef struct	s_shell
+{
+	char		*shell;
+	int			last_ret;
+}				t_shell;
+
+typedef struct	s_cmd
+{
+	char		**args;
+	char		*command;
+}				t_cmd;
+
+int				cd_builtin(char *path);
+void			echo_builtin(char **string);
+void			env_builtin(char **envp);
+int				exit_builtin(int ret, char **string);
 
 #endif

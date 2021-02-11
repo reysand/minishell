@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:06:34 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/09 18:54:14 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/11 18:47:00 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int	exit_builtin(int ret, char **str)
 		if (ft_strcmp(ft_itoa(ret), str[i]) != 0)
 		{
 			ret = -1;
-			ft_printf_fd(2, "%s: %s: %s: %s", SHELL, str[0], str[1], e_num);
+			ft_printf_fd(2, "%s: %s: %s: %s", PS0, str[0], str[1], e_num);
 		}
 		else if (str[i + 1])
 		{
 			ret = 1;
-			ft_printf_fd(STDERR_FILENO, "%s: %s: %s", SHELL, str[0], e_arg);
+			ft_printf_fd(STDERR_FILENO, "%s: %s: %s", PS0, str[0], e_arg);
 			return (ret);
 		}
 	}

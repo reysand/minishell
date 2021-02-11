@@ -6,13 +6,13 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:23 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/09 19:02:39 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/11 20:07:11 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <sys/errno.h>
 
+/*
 static int	executor(char **cmd, char **envp)
 {
 	pid_t	pid;
@@ -45,39 +45,31 @@ static int	executor(char **cmd, char **envp)
 			ft_printf("[log] status = %d\n", status);
 		}
 	}
-	ft_strdel(cmd);
 	return (ret);
 }
-
-/*
-** TODO: Delete include sys/errno.h, and using errno
-** TODO: ft_strsplit need freeing memory
-** TODO: 32 lines in function
 */
 
 int			main(int argc, char **argv, char **envp)
 {
-	char	**cmd;
+	t_shell	shell;
 	char	*line;
-	int		ret;
 
 	(void)argc;
 	(void)argv;
-	ret = 0;
+	(void)envp;
+	shell.last_ret = EXIT_SUCCESS;
 	line = (void *)0;
 	while (1)
 	{
-		ft_printf_fd(STDERR_FILENO, "%s", PROMPT);
+		ft_printf_fd(STDERR_FILENO, "%s", PS1);
 		if (get_next_line(STDIN_FILENO, &line) != 1)
 		{
 			free(line);
 			ft_printf_fd(STDERR_FILENO, "exit\n");
-			return (ret);
+			return (shell.last_ret);
 		}
-		cmd = ft_strsplit(line, ' ');
+		ft_printf_fd(3, "[line] %s\n", line);
 		free(line);
-		if (*cmd && (ret = executor(cmd, envp)) != 0)
-			ft_printf("[MINISHELL: %d] %s\n", ret, strerror(errno));
 	}
-	return (ret);
+	return (shell.last_ret);
 }
