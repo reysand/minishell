@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:11 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/11 20:00:06 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/16 19:04:56 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,19 @@
 # define PS0 "minishell"
 # define PS1 "minishell-0.1.2$ "
 
-typedef struct	s_shell
-{
-	char		*shell;
-	int			last_ret;
-}				t_shell;
-
 typedef struct	s_cmd
 {
 	char		**args;
-	char		*command;
+	char		*program;
 }				t_cmd;
+
+typedef struct	s_shell
+{
+	t_cmd		cmd;
+	char		**env;
+	char		*shell;
+	int			last_ret;
+}				t_shell;
 
 int				cd_builtin(char *path);
 void			echo_builtin(char **string);
