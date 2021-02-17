@@ -6,11 +6,31 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:23 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/16 19:21:07 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/17 13:43:38 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_builtins	g_builtins[] =
+{
+	{"echo", &echo_builtin}
+};
+
+void		executor(t_shell *shell)
+{
+	int	i;
+
+	i = 0;
+	if (ft_strcmp(shell->cmd.program, g_builtins[i].token) == 0)
+	{
+		g_builtins[i].f(shell);
+	}
+	else
+	{
+		ft_printf_fd(STDERR_FILENO, "command not found\n");
+	}
+}
 
 /*
 static int	executor(char **cmd, char **envp)
@@ -36,11 +56,12 @@ static int	executor(char **cmd, char **envp)
 	{
 		if ((pid = fork()) == 0)
 		{
+			ft_printf("[log] pid = %d\n", pid);
 			ret = execve(*cmd, cmd, envp);
 		}
-		ft_printf("[log] pid = %d\n", pid);
-		if (pid > 0)
+		else
 		{
+			ft_printf("[log] pid = %d\n", pid);
 			waitpid(pid, &status, 0);
 			ft_printf("[log] status = %d\n", status);
 		}
@@ -87,7 +108,6 @@ void		init_shell(char **envp, t_shell *shell)
 	}
 	if (!(shell->env = (char **)malloc((i + 1) * sizeof(char *))))
 	{
-		shell->env = (void *)0;
 		return ;
 	}
 	i = 0;
@@ -123,6 +143,7 @@ int			main(int argc, char **argv, char **envp)
 		}
 		parser(line, &shell);
 		print_shell(shell);
+		executor(&shell);
 		free(line);
 	}
 	return (shell.last_ret);

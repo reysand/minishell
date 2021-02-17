@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:11 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/16 19:04:56 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/17 12:46:27 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,19 @@ typedef struct	s_shell
 	int			last_ret;
 }				t_shell;
 
+typedef struct	s_builtins
+{
+	char		*token;
+	void		(*f)(t_shell *shell);
+}				t_builtins;
+
+void			echo_builtin(t_shell *shell);
+
+/*
 int				cd_builtin(char *path);
 void			echo_builtin(char **string);
 void			env_builtin(char **envp);
 int				exit_builtin(int ret, char **string);
+*/
 
 #endif

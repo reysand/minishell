@@ -1,22 +1,38 @@
-.TH ECHO 1 "February 08, 2021" "FT" "FT General Commands Manual"
-.SH NAME
-.B echo
-\-\- write arguments to the standard output
-.SH SYNOPSIS
-.B echo
-[\fIstring ...\fR]
-.SH DESCRIPTION
+.Dd February 17, 2021
+.Dt ECHO 1
+.Os
+.Sh NAME
+.Nm echo
+.Nd write arguments to the standard output
+.Sh SYNOPSIS
+.Nm
+.Op Fl n
+.Op Ar string ...
+.Sh DESCRIPTION
 The
-.B echo
-utility writes its arguments to standard output, followed by a <newline>.
-If there are no arguments, only the <newline> is written.
-.SH EXIT STATUS
+.Nm
+utility writes any specified operands, separated by single blank
+.Pq Ql "\ "
+characters and followed by a newline
+.Pq Ql \en
+character, to the standard output.
+.Pp
+The following option is available:
+.Bl -tag -width flag
+.It Fl n
+Do not print the trailing newline character.
+.El
+.Pp
+Some shells may provide a builtin
+.Nm
+command which is similar or identical to this utility.
+.Sh EXIT STATUS
+.Ex -std
+.Sh SEE ALSO
+.Xr builtin 1 ,
+.Xr minishell 1
+.Sh STANDARDS
 The
-.B echo
-utility exits 0 on success.
-.SH SEE ALSO
-builtin(1), minishell(1)
-.SH STANDARDS
-The
-.B echo
-utility conforms to IEEE Std 1003.1-2017 (``POSIX.1'').
+.Nm
+utility conforms to
+.St -p1003.1-2001 .
