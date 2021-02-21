@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:06:34 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/17 14:59:54 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/21 18:40:09 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 /*
 ** Description: Write arguments to the standard output
+** Any characters between '' and "" writes without changes; only between ""
+** works shielding. If text outside "" or '' its divided by single space
+** character. One " or ' must handling by shell, for minishell this feature is
+** bonus.
 */
 
 void	echo_builtin(t_shell *shell)
@@ -24,17 +28,9 @@ void	echo_builtin(t_shell *shell)
 
 	i = 1;
 	opt_n = 0;
-	if (ft_strcmp(shell->cmd.args[i], "-n") == 0)
+	if (shell->cmd.args[i] && ft_strcmp(shell->cmd.args[i], "-n") == 0)
 	{
 		opt_n = 1;
-		++i;
-	}
-	while (shell->cmd.args[i])
-	{
-		ft_printf("%s ", shell->cmd.args[i]);
-		//dprintf(1, "%s ", shell->cmd.args[i]);
-		//write(1, shell->cmd.args[i], ft_strlen(shell->cmd.args[i]));
-		//write(1, " ", 1);
 		++i;
 	}
 	if (!opt_n)

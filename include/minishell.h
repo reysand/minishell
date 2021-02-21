@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:11 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/17 12:46:27 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/21 18:14:10 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct	s_shell
 	t_cmd		cmd;
 	char		**env;
 	char		*shell;
+	char		*line;
 	int			last_ret;
 }				t_shell;
 
@@ -47,12 +48,6 @@ typedef struct	s_builtins
 }				t_builtins;
 
 void			echo_builtin(t_shell *shell);
-
-/*
-int				cd_builtin(char *path);
-void			echo_builtin(char **string);
-void			env_builtin(char **envp);
-int				exit_builtin(int ret, char **string);
-*/
+void			exit_builtin(t_shell *shell);
 
 #endif

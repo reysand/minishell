@@ -6,7 +6,7 @@
 #    By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/26 13:14:25 by fhelena           #+#    #+#              #
-#    Updated: 2021/02/20 20:50:17 by fhelena          ###   ########.fr        #
+#    Updated: 2021/02/20 20:56:13 by fhelena          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,17 +56,6 @@ all:			libft $(NAME)
 PHONY			+= libft
 libft:
 	$(MAKE) $(LIB_DIR)
-
-NORME			= $(shell norminette $(SRCS) $(INC_DIR)\
-				  | grep "Error" | wc -l | tr -d ' ')
-
-PHONY			+= norme
-norme:
-ifeq ($(NORME), 0)
-	printf "$(COLOR_G)PASS:$(C_RESET)\tnorminette\t[$(NAME)]\n"
-else
-	printf "$(COLOR_R)PASS:$(C_RESET)\tnorminette\t[$(NAME)] [$(NORME)]\n"
-endif
 
 $(NAME):		$(OBJS)
 	printf "\r$(R_CLEAN)Linking: -> $@\n\t$(subst $(subst ,, ),\n\t,$^)\n"

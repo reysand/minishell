@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:23 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/17 13:43:38 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/21 18:13:50 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,63 +14,34 @@
 
 t_builtins	g_builtins[] =
 {
-	{"echo", &echo_builtin}
+	{"echo", &echo_builtin},
+	{"exit", &exit_builtin}
 };
 
-void		executor(t_shell *shell)
+static void	executor(t_shell *shell)
 {
 	int	i;
 
 	i = 0;
-	if (ft_strcmp(shell->cmd.program, g_builtins[i].token) == 0)
+	while (g_builtins[i].token)
 	{
-		g_builtins[i].f(shell);
-	}
-	else
-	{
-		ft_printf_fd(STDERR_FILENO, "command not found\n");
-	}
-}
-
-/*
-static int	executor(char **cmd, char **envp)
-{
-	pid_t	pid;
-	int		status;
-	int		ret;
-
-	ret = 0;
-	if (ft_strcmp(*cmd, "exit") == 0)
-		ret = exit_builtin(ret, cmd);
-	else if (ft_strcmp(*cmd, "echo") == 0)
-		echo_builtin(cmd);
-	else if (ft_strcmp(*cmd, "env") == 0)
-		env_builtin(envp);
-	else if (ft_strcmp(*cmd, "cd") == 0)
-		ret = cd_builtin(cmd[1]);
-	else if (ft_strcmp(*cmd, "setenv") == 0)
-		env_builtin(envp);
-	else if (ft_strcmp(*cmd, "unsetenv") == 0)
-		env_builtin(envp);
-	else
-	{
-		if ((pid = fork()) == 0)
+		if (ft_strcmp(shell->cmd.program, g_builtins[i].token) == 0)
 		{
-			ft_printf("[log] pid = %d\n", pid);
-			ret = execve(*cmd, cmd, envp);
+			g_builtins[i].f(shell);
+			break ;
 		}
 		else
 		{
-			ft_printf("[log] pid = %d\n", pid);
-			waitpid(pid, &status, 0);
-			ft_printf("[log] status = %d\n", status);
+			++i;
 		}
 	}
-	return (ret);
+	if (!(g_builtins[i].token))
+	{
+		ft_printf_fd(2, "%s: %s: command not found\n", PS0, shell->cmd.program);
+	}
 }
-*/
 
-void		print_shell(t_shell shell)
+static void	print_shell(t_shell shell)
 {
 	int	i;
 
@@ -91,13 +62,13 @@ void		print_shell(t_shell shell)
 	ft_printf_fd(3, "[ret] %d\n", shell.last_ret);
 }
 
-void		parser(char *line, t_shell *shell)
+static void	parser(char *line, t_shell *shell)
 {
 	shell->cmd.args = ft_strsplit(line, ' ');
 	shell->cmd.program = shell->cmd.args[0];
 }
 
-void		init_shell(char **envp, t_shell *shell)
+static void	init_shell(char **envp, t_shell *shell)
 {
 	int	i;
 
@@ -124,27 +95,26 @@ void		init_shell(char **envp, t_shell *shell)
 int			main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
-	char	*line;
 
 	(void)argc;
 	(void)argv;
 	(void)envp;
 	ft_printf_fd(3, "\n====================================================\n");
 	init_shell(envp, &shell);
-	line = (void *)0;
+	shell.line = (void *)0;
 	while (1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s", PS1);
-		if (get_next_line(STDIN_FILENO, &line) != 1)
+		if (get_next_line(STDIN_FILENO, &shell.line) != 1)
 		{
-			free(line);
+			free(shell.line);
 			ft_printf_fd(STDERR_FILENO, "exit\n");
 			return (shell.last_ret);
 		}
-		parser(line, &shell);
+		parser(shell.line, &shell);
 		print_shell(shell);
 		executor(&shell);
-		free(line);
+		free(shell.line);
 	}
 	return (shell.last_ret);
 }
