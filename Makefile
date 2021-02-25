@@ -6,7 +6,7 @@
 #    By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/26 13:14:25 by fhelena           #+#    #+#              #
-#    Updated: 2021/02/20 20:56:13 by fhelena          ###   ########.fr        #
+#    Updated: 2021/02/25 10:31:35 by fhelena          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ DEPS			= $(SRCS:%.c=$(DEP_DIR)/%.d)
 SHELL			= /bin/bash
 CC				= gcc
 MKDIR			= -mkdir -p
-MAKE			= make -sC
+MAKE			= -make -sC
 RM				= -rm -rf
 
 # Flags
@@ -49,40 +49,61 @@ C_RESET			= \033[00m
 COLOR_R			= \033[31m
 COLOR_G			= \033[32m
 
+## all:			Call targets 'libft' and 'minishell'
 PHONY			+= all
 all:			libft $(NAME)
-	printf "$(COLOR_G)PASS:$(C_RESET)\t$(NAME)\n"
+	@printf "$(COLOR_G)PASS:$(C_RESET)\t$(NAME)\n"
 
+## libft:		Build libft
 PHONY			+= libft
 libft:
 	$(MAKE) $(LIB_DIR)
 
+## minishell:	Build minishell
 $(NAME):		$(OBJS)
-	printf "\r$(R_CLEAN)Linking: -> $@\n\t$(subst $(subst ,, ),\n\t,$^)\n"
+	@printf "\r$(R_CLEAN)Linking: -> $@\n\t$(subst $(subst ,, ),\n\t,$^)\n"
 	$(CC) $(CFLAGS) $(INCFLAGS) -o $@ $^ $(LDFLAGS) $(LDLIBS)
 
+## *.o:			Assemble an object file from same name *.c file
 $(OBJ_DIR)/%.o:	%.c $(DEP_DIR)/%.d $(LIB_DIR)/$(LIB)
 	$(MKDIR) $(@D) $(dir $(DEPS))
-	printf "\r$(R_CLEAN)Assembling: $< -> $@"
+	@printf "\r$(R_CLEAN)Assembling: $< -> $@"
 	$(CC) $(CFLAGS) $(INCFLAGS) -o $@ -c $< $(DEPFLAGS)
 
 $(DEPS):
 
+## help:		Show help message
+PHONY			+= help
+help:			Makefile
+	@IFS=$$'\n' ; \
+	help_lines=(`sed -n 's/^##//p' $<`); \
+	printf "%-10s %s\n%-10s %s\n" "Target" "Help" "----------" "------------"; \
+	for help_line in $${help_lines[@]}; do \
+		IFS=$$':' ; help_split=($$help_line) ; \
+		help_command=`echo $${help_split[0]} | tr -d ' '` ; \
+		help_info=`echo $${help_split[1]} | sed -e 's/^[[:space:]]*//'` ; \
+		printf "\033[36m%-10s \033[0m%s\n" $$help_command $$help_info; \
+	done
+
+## clean:		Remove object files and dependency files
 PHONY			+= clean
 clean:
 	$(MAKE) $(LIB_DIR) clean
 	$(RM) $(BLD_DIR)
-	printf "$(COLOR_G)PASS:$(C_RESET)\tmake clean\t[$(NAME)]\n"
+	@printf "$(COLOR_G)PASS:$(C_RESET)\tmake clean\t[$(NAME)]\n"
 
+## fclean:		Call target 'clean' and remove executable files
 PHONY			+= fclean
 fclean:			clean
 	$(MAKE) $(LIB_DIR) fclean
 	$(RM) $(NAME)
-	printf "$(COLOR_G)PASS:$(C_RESET)\tmake fclean\t[$(NAME)]\n"
+	@printf "$(COLOR_G)PASS:$(C_RESET)\tmake fclean\t[$(NAME)]\n"
 
+## re:			Call targets 'fclean' and 'all'
 PHONY			+= re
 re:				fclean all
 
+## V=1:			Enable verbose output
 $(V).SILENT:
 
 -include		$(wildcard $(DEPS))
