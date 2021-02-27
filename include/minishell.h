@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:11 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/25 18:19:42 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/27 18:06:25 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define STDIN_FILENO 0
 # define STDOUT_FILENO 1
 # define STDERR_FILENO 2
+# define LLONG_MAX 9223372036854775807LL
 # define PS0 "minishell"
 # define PS1 "minishell-0.1.2$ "
 

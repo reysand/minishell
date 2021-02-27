@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:06:34 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/25 18:15:21 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/27 16:36:51 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,32 +35,56 @@ static void	error_msg(int err, t_shell *shell)
 }
 
 /*
-** Description: Cause the shell to exit with the exit status.
+** Long long decimal-number test
+*/
+
+static int	ft_isnum(char *str)
+{
+	long long	num;
+	int			sign;
+	int			i;
+
+	sign = 0;
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		sign = (int)str[i++];
+	num = 0;
+	while (str[i])
+	{
+		if (ft_isdigit(str[i]))
+			num = num * 10 + (int)(str[i++] - '0');
+		else
+			return (0);
+	}
+	if ((i == 1 && sign) || (sign == '-' && num - 1 > LLONG_MAX))
+		return (0);
+	if (num > LLONG_MAX && sign != '-')
+		return (0);
+	return (1);
+}
+
+/*
+** Cause the shell to exit with the exit status.
 */
 
 void		exit_builtin(t_shell *shell)
 {
-	char	*temp;
-	int		n;
-
 	ft_printf_fd(STDERR_FILENO, "exit\n");
 	if (shell->cmd.args[1])
 	{
-		n = ft_atoi(shell->cmd.args[1]);
-		temp = ft_itoa(n);
-		if (ft_strcmp(temp, shell->cmd.args[1]) != 0)
+		if (!ft_isnum(shell->cmd.args[1]))
 		{
 			error_msg(-1, shell);
 		}
 		else if (shell->cmd.args[2])
 		{
 			error_msg(1, shell);
-			free(temp);
 			return ;
 		}
 		else
-			shell->status = n;
-		free(temp);
+		{
+			shell->status = ft_atoi(shell->cmd.args[1]);
+		}
 	}
 	free_shell(shell);
 	exit(shell->status);

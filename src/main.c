@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:23 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/25 18:53:05 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/27 19:35:18 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ int			main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	(void)envp;
 	ft_printf_fd(3, "\n====================================================\n");
 	init_shell(envp, &shell);
 	while (1)
@@ -93,8 +92,11 @@ int			main(int argc, char **argv, char **envp)
 			return (shell.status);
 		}
 		parser(shell.line, &shell);
-		print_shell(shell);
-		executor(&shell);
+		if (shell.cmd.args[0])
+		{
+			print_shell(shell);
+			executor(&shell);
+		}
 		free(shell.line);
 		free_shell(&shell);
 	}
