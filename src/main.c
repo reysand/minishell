@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:23 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/27 19:35:18 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/02/28 19:13:56 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,17 @@ static void	print_shell(t_shell shell)
 
 static void	parser(char *line, t_shell *shell)
 {
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\t')
+		{
+			line[i] = ' ';
+		}
+		++i;
+	}
 	shell->cmd.args = ft_strsplit(line, ' ');
 }
 
