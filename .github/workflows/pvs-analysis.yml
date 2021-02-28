@@ -2,9 +2,11 @@ name: "PVS-Studio"
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, dev ]
   pull_request:
     branches: [ master ]
+  schedule:
+    - cron: '42 23 16 * *'
 
 jobs:
   build:

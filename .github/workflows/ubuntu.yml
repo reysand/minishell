@@ -2,7 +2,7 @@ name: ubuntu
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, dev ]
   pull_request:
     branches: [ master ]
 
@@ -17,12 +17,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: |
-        sudo gem install bundler
-        git clone https://github.com/42Paris/norminette.git ~/norminette
-        cd ~/norminette && bundle
-    - name: Norminette
-      run: ~/norminette/norminette.rb .
     - name: Build
       run: make
