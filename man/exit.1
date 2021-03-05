@@ -1,0 +1,30 @@
+.Dd March 01, 2021
+.Dt EXIT 1
+.Os
+.Sh NAME
+.Nm exit
+.Nd cause the shell to exit
+.Sh SYNOPSIS
+.Nm
+.Op Ar n
+.Sh DESCRIPTION
+The
+.Nm
+utility shall cause the shell to exit with exit status specified by the unsigned
+decimal integer
+.Em n .
+If
+.Em n
+is specified, but its value is not between 0 and 255 inclusively, the exit
+status is undefined.
+.Sh EXIT STATUS
+The exit status shall be
+.Em n ,
+if specified, except that the behavior is unspecified if
+.Em n
+is not an unsigned decimal integer or is greater than 255. Otherwise, the value
+shall be the exit value of the last command executed, or zero if no command was
+executed.
+.Sh SEE ALSO
+.Xr builtin 1 ,
+.Xr minishell 1
