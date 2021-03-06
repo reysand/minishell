@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:06:34 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/28 19:13:30 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/03/06 18:37:08 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,4 @@ void	echo_builtin(t_shell *shell)
 		ft_printf("\n");
 	}
 	shell->status = EXIT_SUCCESS;
-	return ;
 }

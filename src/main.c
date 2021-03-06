@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:23 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/28 19:13:56 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/03/06 18:27:19 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 t_builtins	g_builtins[] =
 {
+	{"cd", &cd_builtin},
 	{"echo", &echo_builtin},
+	{"env", &env_builtin},
 	{"exit", &exit_builtin},
+	{"setenv", &setenv_builtin},
+	{"unsetenv", &unsetenv_builtin},
 	{(void *)0, (void *)0}
 };
 
@@ -38,28 +42,8 @@ static void	executor(t_shell *shell)
 	}
 	if (!(g_builtins[i].token))
 	{
-		ft_printf_fd(2, "%s: %s: command not found\n", PS0, shell->cmd.args[0]);
+		ft_printf_fd(2, "%s: %s: %s\n", PS0, shell->cmd.args[0], ENOCMD);
 	}
-}
-
-static void	print_shell(t_shell shell)
-{
-	int	i;
-
-	i = 0;
-	while (shell.env[i])
-	{
-		ft_printf_fd(3, "[env %d] %s\n", i, shell.env[i]);
-		++i;
-	}
-	ft_printf_fd(3, "[program] %s\n", shell.cmd.args[0]);
-	i = 0;
-	while (shell.cmd.args[i])
-	{
-		ft_printf_fd(3, "[args %d] %s\n", i, shell.cmd.args[i]);
-		++i;
-	}
-	ft_printf_fd(3, "[ret] %d\n", shell.status);
 }
 
 static void	parser(char *line, t_shell *shell)
@@ -91,25 +75,22 @@ int			main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	ft_printf_fd(3, "\n====================================================\n");
 	init_shell(envp, &shell);
 	while (1)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s", PS1);
 		if (get_next_line(STDIN_FILENO, &shell.line) != 1)
 		{
-			free(shell.line);
 			ft_printf_fd(STDERR_FILENO, "exit\n");
-			return (shell.status);
+			free(shell.line);
+			exit(shell.status);
 		}
 		parser(shell.line, &shell);
+		free(shell.line);
 		if (shell.cmd.args[0])
 		{
-			print_shell(shell);
 			executor(&shell);
 		}
-		free(shell.line);
-		free_shell(&shell);
+		free_matrix(shell.cmd.args);
 	}
-	return (shell.status);
 }

@@ -6,21 +6,21 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 18:49:07 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/25 18:52:14 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/03/06 17:56:21 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_shell(t_shell *shell)
+void	free_matrix(char **matrix)
 {
 	int	i;
 
 	i = 0;
-	while (shell->cmd.args[i])
+	while (matrix[i])
 	{
-		free(shell->cmd.args[i]);
+		free(matrix[i]);
 		++i;
 	}
-	free(shell->cmd.args);
+	free(matrix);
 }

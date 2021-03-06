@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:06:34 by fhelena           #+#    #+#             */
-/*   Updated: 2021/02/27 16:36:51 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/03/06 18:07:03 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,18 @@
 static void	error_msg(int err, t_shell *shell)
 {
 	char		**args;
-	const char	*e_arg;
-	const char	*e_num;
 
-	e_arg = "too many arguments";
-	e_num = "numeric argument required";
 	args = shell->cmd.args;
 	ft_printf_fd(STDERR_FILENO, "%s: ", PS0);
 	if (err == -1)
 	{
 		shell->status = err;
-		ft_printf_fd(STDERR_FILENO, "%s: %s: %s\n", args[0], args[1], e_num);
+		ft_printf_fd(STDERR_FILENO, "%s: %s: %s\n", args[0], args[1], ENONUM);
 	}
 	else if (err == 1)
 	{
 		shell->status = err;
-		ft_printf_fd(STDERR_FILENO, "%s: %s\n", args[0], e_arg);
+		ft_printf_fd(STDERR_FILENO, "%s: %s\n", args[0], EARGS);
 	}
 }
 
@@ -86,6 +82,6 @@ void		exit_builtin(t_shell *shell)
 			shell->status = ft_atoi(shell->cmd.args[1]);
 		}
 	}
-	free_shell(shell);
+	free_matrix(shell->cmd.args);
 	exit(shell->status);
 }
