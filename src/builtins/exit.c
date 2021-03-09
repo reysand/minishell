@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 13:06:34 by fhelena           #+#    #+#             */
-/*   Updated: 2021/03/06 18:07:03 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/03/09 17:46:18 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,18 @@ static int	ft_isnum(char *str)
 	num = 0;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]))
+		if (ft_isdigit(str[i]) && sign == '-')
+		{
+			num = num * 10 - (int)(str[i++] - '0');
+		}
+		else if (ft_isdigit(str[i]))
+		{
 			num = num * 10 + (int)(str[i++] - '0');
+		}
 		else
 			return (0);
 	}
-	if ((i == 1 && sign) || (sign == '-' && num - 1 > LLONG_MAX))
-		return (0);
-	if (num > LLONG_MAX && sign != '-')
+	if ((sign != '-' && num < 0) || (sign == '-' && num > 0))
 		return (0);
 	return (1);
 }

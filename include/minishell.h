@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:11 by fhelena           #+#    #+#             */
-/*   Updated: 2021/03/06 18:28:50 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/03/09 17:45:29 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,6 @@
 # define STDIN_FILENO 0
 # define STDOUT_FILENO 1
 # define STDERR_FILENO 2
-
-/*
-** Limits
-*/
-# define LLONG_MAX 9223372036854775807LL
 
 /*
 ** Errors
