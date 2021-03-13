@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:11 by fhelena           #+#    #+#             */
-/*   Updated: 2021/03/09 17:45:29 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/03/13 18:27:16 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 */
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
+# define _WEXITSTATUS(x) (x >> 8)
 
 /*
 ** File descriptors
@@ -45,7 +46,12 @@
 # define PS0 "minishell"
 # define PS1 "minishell-0.1.3$ "
 
+int		get_matrix_size(char **matrix);
 void	free_matrix(char **matrix);
+
+/*
+** Built-ins
+*/
 void	cd_builtin(t_shell *shell);
 void	echo_builtin(t_shell *shell);
 void	env_builtin(t_shell *shell);

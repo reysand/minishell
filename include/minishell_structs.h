@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:11 by fhelena           #+#    #+#             */
-/*   Updated: 2021/03/06 17:47:47 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/03/13 18:34:44 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct	s_cmd
 typedef struct	s_shell
 {
 	t_cmd		cmd;
-	char		**env;
+	char		**envp;
 	char		*line;
 	int			status;
 }				t_shell;

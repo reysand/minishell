@@ -6,7 +6,7 @@
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 17:07:23 by fhelena           #+#    #+#             */
-/*   Updated: 2021/03/06 18:27:19 by fhelena          ###   ########.fr       */
+/*   Updated: 2021/03/13 19:34:13 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ t_builtins	g_builtins[] =
 
 static void	executor(t_shell *shell)
 {
-	int	i;
+	pid_t	pid;
+	int		status;
+	int		i;
 
 	i = 0;
 	while (g_builtins[i].token)
@@ -33,16 +35,20 @@ static void	executor(t_shell *shell)
 		if (ft_strcmp(shell->cmd.args[0], g_builtins[i].token) == 0)
 		{
 			g_builtins[i].f(shell);
-			break ;
+			return ;
 		}
-		else
-		{
-			++i;
-		}
+		++i;
 	}
-	if (!(g_builtins[i].token))
+	if (!(pid = fork()))
 	{
-		ft_printf_fd(2, "%s: %s: %s\n", PS0, shell->cmd.args[0], ENOCMD);
+		if ((execve(shell->cmd.args[0], shell->cmd.args, shell->envp)) == -1)
+			ft_printf_fd(2, "%s: %s: %s\n", PS0, shell->cmd.args[0], ENOCMD);
+		exit(127);
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+		shell->status = _WEXITSTATUS(status);
 	}
 }
 
@@ -64,7 +70,7 @@ static void	parser(char *line, t_shell *shell)
 
 static void	init_shell(char **envp, t_shell *shell)
 {
-	shell->env = envp;
+	shell->envp = envp;
 	shell->line = (void *)0;
 	shell->status = EXIT_SUCCESS;
 }

@@ -6,7 +6,7 @@
 #    By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/26 13:04:58 by fhelena           #+#    #+#              #
-#    Updated: 2021/02/25 18:52:32 by fhelena          ###   ########.fr        #
+#    Updated: 2021/03/11 17:55:01 by fhelena          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ VPATH			+= $(OBJ_DIR)/$(SRC_DIR)
 
 # Source Files
 SRC_SRCS		= main.c	\
+				  tools.c	\
 				  free.c
 
 -include		$(BUILTINS_DIR)/builtins.mk

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhelena <fhelena@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/26 13:06:34 by fhelena           #+#    #+#             */
-/*   Updated: 2021/03/13 18:56:20 by fhelena          ###   ########.fr       */
+/*   Created: 2021/03/11 17:38:05 by fhelena           #+#    #+#             */
+/*   Updated: 2021/03/13 18:54:05 by fhelena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	env_builtin(t_shell *shell)
+int		get_matrix_size(char **matrix)
 {
-	char	**envp;
+	int	size;
 
-	envp = shell->envp;
-	while (*envp)
+	size = 0;
+	while (matrix[size])
 	{
-		ft_printf("%s\n", *envp++);
+		++size;
 	}
-	shell->status = EXIT_SUCCESS;
+	return (size);
 }
